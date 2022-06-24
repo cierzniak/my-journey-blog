@@ -7,6 +7,8 @@ module.exports = {
     'eslint:recommended',
     'airbnb',
     'airbnb-typescript',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
@@ -28,6 +30,7 @@ module.exports = {
     '@typescript-eslint/strict-boolean-expressions': ['error', { allowString: false, allowNumber: false }],
     eqeqeq: ['error', 'always'],
     'linebreak-style': 'off',
+    'no-restricted-exports': 'off',
     'prettier/prettier': [
       'error',
       {

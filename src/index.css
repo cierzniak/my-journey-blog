@@ -15,11 +15,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro,
-    Menlo,
-    Monaco,
-    Consolas,
-    'Courier New',
-    monospace;
+#root {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 5rem 1fr 1.5rem;
 }
