@@ -17,6 +17,13 @@ body {
 
 #root {
   display: grid;
+  min-width: 420px;
+  max-width: 1200px;
   height: 100vh;
+  margin: 0 auto;
   grid-template-rows: 5rem 1fr 1.5rem;
+}
+
+main {
+  margin: 0.5rem;
 }

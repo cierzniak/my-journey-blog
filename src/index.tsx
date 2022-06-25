@@ -10,7 +10,12 @@ import './index.css';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <Header />
+    <Header
+      info={[
+        { title: 'Podróże', value: '17' },
+        { title: 'Ostatnia', value: 'Poznań' },
+      ]}
+    />
     <main>
       <App />
     </main>
