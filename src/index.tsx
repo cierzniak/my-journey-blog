@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import Header from './components/Header';
+import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import App from './App';
 
@@ -14,6 +15,12 @@ root.render(
       info={[
         { title: 'Podróże', value: '17' },
         { title: 'Ostatnia', value: 'Poznań' },
+      ]}
+    />
+    <Navigation
+      links={[
+        { name: 'Strona główna', url: '/' },
+        { name: 'O mnie', url: '/about' },
       ]}
     />
     <main>
