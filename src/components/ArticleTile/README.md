@@ -8,8 +8,8 @@ Kafelek artykułu wykorzystywany podczas prezentacji dostępnych artykułów
 | Parametr   | Typ      | Przykład                                 |
 | ---------- | -------- | ---------------------------------------- |
 | `title`    | `string` | `'Spotkanie z Koziołkami'`               |
-| `date`     | `string` | `'2022-03-31'`                           |
-| `imageUrl` | `string` | `'https://cdn.example.com/article1.jpg'` |
+| `date`     | `Y-m-d`  | `'2022-03-31'`                           |
+| `imageUrl` | `URL`    | `'https://cdn.example.com/article1.jpg'` |
 
 ## Przykład zastosowania
 
@@ -17,13 +17,33 @@ Kafelek artykułu wykorzystywany podczas prezentacji dostępnych artykułów
 import ArticleTile from "../path/to/components/ArticleTile";
 
 const MyPage = () => (
-  <div
-    style={{
-      display: "grid",
-      gap: "0.5rem",
-      gridTemplateColumns: "repeat(4, 1fr)",
-    }}
-  >
+  <Tile
+    title="Testowy artykuł o Poznaniu"
+    date="2022-06-25"
+    imageUrl="https://picsum.photos/300/200"
+  />
+);
+```
+
+# Kolekcja (lista) kafelków artykułów
+
+Porządkuje pojedyncze kafelki w kolekcję ułożoną na siatce.
+
+## Parametry
+
+| Parametr         | Typ      | Przykład |
+| ---------------- | -------- | -------- |
+| wnętrze kolekcji | `Tile[]` | _n/a_    |
+
+## Przykład zastosowania
+
+```jsx
+import ArticleTile, {
+  ArticleTileList,
+} from "../path/to/components/ArticleTile";
+
+const MyPage = () => (
+  <ArticleTileList>
     <Tile
       title="Testowy artykuł o Poznaniu"
       date="2022-06-25"
@@ -34,6 +54,6 @@ const MyPage = () => (
       date="2022-06-30"
       imageUrl="https://picsum.photos/300/200"
     />
-  </div>
+  </ArticleTileList>
 );
 ```
