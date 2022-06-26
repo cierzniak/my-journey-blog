@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
-import App from './App';
+import IndexPage from './pages/Index';
 
 import './index.css';
 
@@ -24,7 +25,11 @@ root.render(
       ]}
     />
     <main>
-      <App />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<IndexPage />} />
+        </Routes>
+      </BrowserRouter>
     </main>
     <Footer />
   </React.StrictMode>
