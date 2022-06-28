@@ -13,12 +13,7 @@ import './index.css';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <Header
-      info={[
-        { title: 'Podróże', value: '17' },
-        { title: 'Ostatnia', value: 'Poznań' },
-      ]}
-    />
+    <Header />
     <BrowserRouter>
       <Navigation
         links={[
