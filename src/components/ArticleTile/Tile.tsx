@@ -1,20 +1,22 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
 import styles from './Tile.module.css';
 
 export interface TileProps {
+  slug: string;
   title: string;
   date: string;
   imageUrl: string;
 }
 
-const Tile: FC<TileProps> = ({ title, date, imageUrl }) => (
-  <a href='/' className={clsx({ [styles.tile]: true })}>
+const Tile: FC<TileProps> = ({ slug, title, date, imageUrl }) => (
+  <Link to={`/article/${slug}`} className={clsx({ [styles.tile]: true })}>
     <div>{title}</div>
     <div>{date}</div>
     <img src={imageUrl} alt={title} />
-  </a>
+  </Link>
 );
 
 export default Tile;

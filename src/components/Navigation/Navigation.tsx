@@ -1,12 +1,8 @@
 import { FC } from 'react';
+import { NavLink, NavLinkProps } from 'react-router-dom';
 import clsx from 'clsx';
 
 import styles from './Navigation.module.css';
-
-interface NavLinkProps {
-  name: string;
-  url: string;
-}
 
 export interface NavigationProps {
   links: NavLinkProps[];
@@ -14,10 +10,14 @@ export interface NavigationProps {
 
 const Navigation: FC<NavigationProps> = ({ links }) => (
   <nav className={clsx({ [styles.nav]: true })}>
-    {links.map(({ name, url }) => (
-      <a key={url} href={url}>
-        {name}
-      </a>
+    {links.map(({ to, children }) => (
+      <NavLink
+        key={`nav-${to.toString()}`}
+        to={to}
+        className={({ isActive }) => clsx({ [styles.link]: true, [styles['link-active']]: isActive })}
+      >
+        {children}
+      </NavLink>
     ))}
   </nav>
 );

@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import IndexPage from './pages/Index';
+import AboutPage from './pages/About';
 
 import './index.css';
 
@@ -18,19 +19,20 @@ root.render(
         { title: 'Ostatnia', value: 'Poznań' },
       ]}
     />
-    <Navigation
-      links={[
-        { name: 'Strona główna', url: '/' },
-        { name: 'O mnie', url: '/about' },
-      ]}
-    />
-    <main>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Navigation
+        links={[
+          { children: 'Strona główna', to: '/' },
+          { children: 'O mnie', to: '/about' },
+        ]}
+      />
+      <main>
         <Routes>
           <Route path='/' element={<IndexPage />} />
+          <Route path='/about' element={<AboutPage />} />
         </Routes>
-      </BrowserRouter>
-    </main>
+      </main>
+    </BrowserRouter>
     <Footer />
   </React.StrictMode>
 );

@@ -8,9 +8,9 @@ nagłówkiem.
 
 ## Parametry
 
-| Parametr | Typ              | Przykład                                |
-| -------- | ---------------- | --------------------------------------- |
-| `links`  | `NavLinkProps[]` | `[{ name: 'Strona główna', url: '/' }]` |
+| Parametr | Typ              | Przykład                                                                                                        |
+| -------- | ---------------- | --------------------------------------------------------------------------------------------------------------- |
+| `links`  | `NavLinkProps[]` | `[{ children: 'Strona główna', to: '/' }]` (`children` to może być cokolwiek co spełnia interfejs ReactElement) |
 
 ## Przykład zastosowania
 
