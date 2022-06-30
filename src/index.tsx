@@ -7,6 +7,7 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import IndexPage from './pages/Index';
 import AboutPage from './pages/About';
+import ArticlePage from './pages/Article';
 
 import './index.css';
 
@@ -25,6 +26,7 @@ root.render(
         <Routes>
           <Route path='/' element={<IndexPage />} />
           <Route path='/about' element={<AboutPage />} />
+          <Route path='/article/:slug' element={<ArticlePage />} />
         </Routes>
       </main>
     </BrowserRouter>
