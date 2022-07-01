@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "clsx": "^1.1.1",
+    "prop-types": "^15.8.1",
+    "ra-data-json-server": "^4.2.0",
     "react": "^18.2.0",
+    "react-admin": "^4.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "react-simple-maps": "^2.3.0",
