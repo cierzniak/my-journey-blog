@@ -10,6 +10,7 @@ import AboutPage from './pages/About';
 import ArticlePage from './pages/Article';
 import AdminLayout from './pages/Admin/Layout';
 import AdminListPage from './pages/Admin/List';
+import AdminAddPage from './pages/Admin/Add';
 
 import './index.css';
 
@@ -32,6 +33,7 @@ root.render(
           <Route path='/article/:slug' element={<ArticlePage />} />
           <Route path='/admin' element={<AdminLayout />}>
             <Route path='' element={<AdminListPage />} />
+            <Route path='add' element={<AdminAddPage />} />
           </Route>
         </Routes>
       </main>
