@@ -8,6 +8,8 @@ import Footer from './components/Footer';
 import IndexPage from './pages/Index';
 import AboutPage from './pages/About';
 import ArticlePage from './pages/Article';
+import AdminLayout from './pages/Admin/Layout';
+import AdminListPage from './pages/Admin/List';
 
 import './index.css';
 
@@ -20,6 +22,7 @@ root.render(
         links={[
           { children: 'Strona główna', to: '/' },
           { children: 'O mnie', to: '/about' },
+          { children: 'Admin', to: '/admin' },
         ]}
       />
       <main>
@@ -27,6 +30,9 @@ root.render(
           <Route path='/' element={<IndexPage />} />
           <Route path='/about' element={<AboutPage />} />
           <Route path='/article/:slug' element={<ArticlePage />} />
+          <Route path='/admin' element={<AdminLayout />}>
+            <Route path='' element={<AdminListPage />} />
+          </Route>
         </Routes>
       </main>
     </BrowserRouter>
