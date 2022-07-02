@@ -1,12 +1,14 @@
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync, writeFile } = require('fs');
 const { randomUUID } = require('crypto');
 const slugify = require('slug-generator');
 const router = require('express').Router();
 
-const { posts } = require('../data/posts.json');
-
 router.get('/', (req, res) => {
-  res.status(200).json(posts);
+  const filePath = `${__dirname}/../data/posts.json`;
+  const file = readFileSync(filePath, 'utf8');
+  const data = JSON.parse(file);
+
+  return res.status(200).json(data.posts);
 });
 
 router.post('/', (req, res) => {
@@ -24,10 +26,26 @@ router.post('/', (req, res) => {
     imageUrl: `/images/${id}.jpg`,
     image: undefined,
   });
-  writeFileSync(filePath, JSON.stringify(data));
-  writeFileSync(`${__dirname}/../data/images/${id}.jpg`, image.replace(/^data:image\/jpeg;base64,/, ""), 'base64');
-
-  res.status(201).json({ added: true });
+  writeFile(filePath, JSON.stringify(data), () => {
+    writeFile(`${__dirname}/../data/images/${id}.jpg`, image.replace(/^data:image\/jpeg;base64,/, ""), 'base64', () => {
+      return res.status(201).json({ added: true });
+    });
+  });
 });
+
+router.delete('/:id', (req, res) => {
+  const filePath = `${__dirname}/../data/posts.json`;
+  const file = readFileSync(filePath, 'utf8');
+  const data = JSON.parse(file);
+
+  const posts = data.posts.filter(({ id }) => id !== req.params.id);
+
+  writeFile(filePath, JSON.stringify({
+    ...data,
+    posts,
+  }), () => {
+    return res.status(204);
+  });
+})
 
 module.exports = router;

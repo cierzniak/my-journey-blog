@@ -11,6 +11,7 @@ import ArticlePage from './pages/Article';
 import AdminLayout from './pages/Admin/Layout';
 import AdminListPage from './pages/Admin/List';
 import AdminAddPage from './pages/Admin/Add';
+import AdminDeletePage from './pages/Admin/Delete';
 
 import './index.css';
 
@@ -34,6 +35,7 @@ root.render(
           <Route path='/admin' element={<AdminLayout />}>
             <Route path='' element={<AdminListPage />} />
             <Route path='add' element={<AdminAddPage />} />
+            <Route path='delete/:id' element={<AdminDeletePage />} />
           </Route>
         </Routes>
       </main>

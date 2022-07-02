@@ -27,10 +27,10 @@ const List: FC = () => {
         <Loading />
       ) : (
         <>
-          <ArticleList articles={articles} />
           <ButtonLink to='/admin/add' className={clsx({ right: true })}>
             Dodaj nowy artykuł
           </ButtonLink>
+          <ArticleList articles={articles} />
         </>
       )}
     </>
