@@ -14,6 +14,7 @@ interface TextInputProps {
   label: string;
   validation?: object;
   type?: 'text' | 'password' | 'file' | 'textarea';
+  value?: string | undefined;
   register: UseFormRegister<ArticleFormProps>;
   errors: FieldErrors<ArticleFormProps>;
 }
@@ -22,7 +23,15 @@ const ErrorBox: FC<{ children: string }> = ({ children }) => (
   <p className={clsx({ [styles.error]: true })}>{children}</p>
 );
 
-const GenericInput: FC<TextInputProps> = ({ name, label, validation = {}, type = 'text', register, errors }) => {
+const GenericInput: FC<TextInputProps> = ({
+  name,
+  label,
+  validation = {},
+  type = 'text',
+  value = undefined,
+  register,
+  errors,
+}) => {
   const errorMessage = get(errors, `${name}.message`) as string | null;
   const Component = 'textarea' !== type ? 'input' : 'textarea';
 
@@ -34,6 +43,7 @@ const GenericInput: FC<TextInputProps> = ({ name, label, validation = {}, type =
       <Component
         type={type}
         className={clsx({ [styles.input]: true, [styles['input-area']]: 'textarea' === type })}
+        defaultValue={value}
         {...register(name, validation)}
       />
       {null !== errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
@@ -41,7 +51,10 @@ const GenericInput: FC<TextInputProps> = ({ name, label, validation = {}, type =
   );
 };
 
-const ArticleForm: FC<{ onSubmit: (data: ArticleFormProps) => void }> = ({ onSubmit }) => {
+const ArticleForm: FC<{ onSubmit: (data: ArticleFormProps) => void; data?: ArticleProps }> = ({
+  onSubmit,
+  data = {},
+}) => {
   const {
     register,
     handleSubmit,
@@ -50,10 +63,11 @@ const ArticleForm: FC<{ onSubmit: (data: ArticleFormProps) => void }> = ({ onSub
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+    <form onSubmit={handleSubmit((formData) => onSubmit(formData))}>
       <GenericInput
         name='title'
         label='Tytuł'
+        value={data?.title}
         validation={{ required: 'Tytuł jest wymagany' }}
         register={register}
         errors={errors}
@@ -61,6 +75,7 @@ const ArticleForm: FC<{ onSubmit: (data: ArticleFormProps) => void }> = ({ onSub
       <GenericInput
         name='date'
         label='Data (rok-miesiąc-dzień)'
+        value={data?.date}
         validation={{
           required: 'Data jest wymagana',
           pattern: { value: /20\d{2}-[01]\d-[0-3]\d/, message: 'Niepoprawny format daty' },
@@ -68,17 +83,20 @@ const ArticleForm: FC<{ onSubmit: (data: ArticleFormProps) => void }> = ({ onSub
         register={register}
         errors={errors}
       />
-      <GenericInput
-        name='imageUrl'
-        label='Fotka'
-        type='file'
-        validation={{ required: 'Fotka jest wymagana' }}
-        register={register}
-        errors={errors}
-      />
+      {data.imageUrl === undefined && (
+        <GenericInput
+          name='imageUrl'
+          label='Fotka'
+          type='file'
+          validation={{ required: 'Fotka jest wymagana' }}
+          register={register}
+          errors={errors}
+        />
+      )}
       <GenericInput
         name='location.city'
         label='Miasto'
+        value={data?.location?.city}
         validation={{ required: 'Miasto jest wymagane' }}
         register={register}
         errors={errors}
@@ -86,6 +104,7 @@ const ArticleForm: FC<{ onSubmit: (data: ArticleFormProps) => void }> = ({ onSub
       <GenericInput
         name='location.latitude'
         label='Latitude'
+        value={data?.location?.latitude}
         validation={{ required: 'Pole wymagane', pattern: { value: /\d{1,2}\.\d+/, message: 'Zły format danych' } }}
         register={register}
         errors={errors}
@@ -93,6 +112,7 @@ const ArticleForm: FC<{ onSubmit: (data: ArticleFormProps) => void }> = ({ onSub
       <GenericInput
         name='location.longitude'
         label='Longitude'
+        value={data?.location?.longitude}
         validation={{ required: 'Pole wymagane', pattern: { value: /\d{1,2}\.\d+/, message: 'Zły format danych' } }}
         register={register}
         errors={errors}
@@ -101,6 +121,7 @@ const ArticleForm: FC<{ onSubmit: (data: ArticleFormProps) => void }> = ({ onSub
         name='content'
         label='Treść postu'
         type='textarea'
+        value={data?.content}
         validation={{ required: 'Opisz swoją podróż' }}
         register={register}
         errors={errors}

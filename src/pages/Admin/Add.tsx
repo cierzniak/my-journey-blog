@@ -29,4 +29,5 @@ const Add: FC = () => {
 
   return <ArticleForm onSubmit={submitForm} />;
 };
+
 export default Add;
